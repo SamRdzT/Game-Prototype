@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float flightDuration = 5f;
 
     [Header("UI Elements")]
-    [SerializeField] private Text flightTimerText; // Reemplazamos el Slider por Texto
+    [SerializeField] private Text flightTimerText;
     [SerializeField] private Text jumpCountText;
 
     [Header("Other")]
@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
         currentMaxExtraJumps = defaultExtraJumps;
         extraJump = currentMaxExtraJumps;
 
-        // Inicializar UI: ocultar el texto de vuelo al empezar
         if (flightTimerText != null)
         {
             flightTimerText.gameObject.SetActive(false);
@@ -86,14 +85,11 @@ public class PlayerMovement : MonoBehaviour
     {
         flightTimer -= Time.deltaTime;
 
-        // Actualizar el texto con números enteros (5, 4, 3, 2, 1, 0)
         if (flightTimerText != null)
         {
-            // Mathf.Max asegura que no muestre números negativos
             int secondsLeft = Mathf.CeilToInt(Mathf.Max(0, flightTimer));
             flightTimerText.text = "VUELO: " + secondsLeft + "s";
 
-            // Efecto visual: si queda poco tiempo (menos de 2s), ponerlo en rojo
             flightTimerText.color = (flightTimer < 2f) ? Color.red : Color.magenta;
         }
 
